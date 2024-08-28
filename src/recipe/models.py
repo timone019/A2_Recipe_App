@@ -13,6 +13,8 @@ class Recipe(models.Model):
     difficulty = models.CharField(max_length=20, choices=DIFFICULTY_CHOICES)
     description = models.TextField(blank=True, null=True)
     instructions = models.TextField(blank=True, null=True)
+    
+    pic = models.ImageField(upload_to='recipe', default='default.jpg')
 
     def __str__(self):
         return self.name
