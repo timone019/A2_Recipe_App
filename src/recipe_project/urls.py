@@ -16,9 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+<<<<<<< HEAD
 from django.urls import include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('recipe.urls'))
+=======
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+>>>>>>> 0dbf1a9c7f88e5af25e02f89b59da443e70065f8
 ]
