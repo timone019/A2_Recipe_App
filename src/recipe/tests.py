@@ -10,8 +10,8 @@ class RecipeModelTest(TestCase):
             name="Pasta",
             cooking_time=30,
         )
-        self.recipe.ingredients.create(name="Tomato")
-        self.recipe.ingredients.create(name="Pasta")
+        self.recipe.ingredients.create(name="Tomato", quantity=1.00)
+        self.recipe.ingredients.create(name="Pasta", quantity=2.00)
 
     def test_recipe_creation(self):
         self.assertEqual(self.recipe.name, "Pasta")

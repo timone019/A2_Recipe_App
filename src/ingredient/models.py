@@ -9,4 +9,4 @@ class Ingredient(models.Model):
     recipe = models.ForeignKey('recipe.Recipe', on_delete=models.CASCADE, related_name='ingredients')
 
     def __str__(self):
-        return f"{self.name} ({self.quantity}) ({self.unit})"
+        return f"{self.name} ({self.quantity:.2f}) ({self.unit})"
