@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ recipe.name }}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'recipe/css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1>{{ recipe.name }}</h1>
+    </header>
+    <div class="container">
+        <p>Cooking Time: {{ recipe.cooking_time }} minutes</p>
+        <p>Difficulty: {{ recipe.difficulty }}</p>
+        <div class="description">
+            <h3>Description:</h3>
+            <p>{{ recipe.description }}</p>
+        </div>
+        <div class="ingredients">
+            <h3>Ingredients:</h3>
+            <ul>
+                {% for ingredient in recipe.ingredients.all %}
+                <li>{{ ingredient.name }} ({{ ingredient.quantity }})</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="instructions">
+            <h3>Instructions:</h3>
+            <p>{{ recipe.instructions }}</p>
+        </div>
+    </div>
+</body>
+</html>

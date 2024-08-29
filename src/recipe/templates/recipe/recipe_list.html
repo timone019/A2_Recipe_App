@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recipe Home</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'recipe/css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Recipe List</h1>
+    </header>
+    <div class="container">
+        {% for recipe in recipes %}
+        <div class="recipe">
+            <h2><a href="{% url 'recipe:recipe_detail' recipe.id %}" class="recipe-link">{{ recipe.name }}</a></h2>
+            <br>            
+            <img src="{{ recipe.pic.url }}" alt="{{ recipe.name }}" class="recipe-image">
+            <p>Cooking Time: {{ recipe.cooking_time }} minutes</p>
+            <p>Difficulty: {{ recipe.difficulty }}</p>
+            <p>Description: {{ recipe.description|slice:":100" }}...</p>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

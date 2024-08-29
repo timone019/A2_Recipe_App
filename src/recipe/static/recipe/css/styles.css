@@ -1,0 +1,94 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.enter-link, .recipe-link {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    height: 50px; /* Set a fixed height for the links */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.enter-link:hover, .recipe-link:hover {
+    background-color: #555;
+}
+
+
+/* Common styles for both .container and .home-container */
+.container, .home-container {
+    width: 80%;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Grid-specific styles for .container */
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.recipe {
+    border: 10px solid #ddd;
+    border-radius: 5px;
+    padding: 10px 0;
+}
+.recipe h2 {
+    margin: 0;
+    color: #333;
+}
+.recipe p {
+    margin: 5px 0;
+    color: #666;
+}
+
+.recipe-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+/* Center and align the image in recipe details */
+.recipe-detail-image {
+    display: block;
+    margin: 20px auto;
+    max-width: 600px; /* Set a maximum width for the image */
+    width: 100%; /* Ensure the image scales down with the container */
+    height: auto;
+    border-radius: 5px;
+}
+
+.ingredients {
+    margin-top: 10px;
+}
+.ingredients ul {
+    list-style-type: none;
+    padding: 0;
+}
+.ingredients li {
+    background-color: #f9f9f9;
+    margin: 5px 0;
+    padding: 5px;
+    border: 1px solid #ddd;
+}
