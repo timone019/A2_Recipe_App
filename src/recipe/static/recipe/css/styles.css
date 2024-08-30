@@ -32,15 +32,24 @@ a:hover {
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
+    text-align: center; /* Center align content */
 }
 
 /* Recipe List Styles */
+.recipe-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
 .recipe {
     border: 1px solid #ddd;
     border-radius: 10px;
     padding: 20px;
     margin-bottom: 20px;
     transition: box-shadow 0.3s ease;
+    width: 48%; /* Adjust width for grid layout */
+    box-sizing: border-box;
 }
 
 .recipe:hover {
@@ -59,8 +68,8 @@ a:hover {
 
 .recipe-image {
     width: 100%;
-    height: auto;
-    object-fit: cover;
+    height: 600px; /* Set a fixed height for consistency */
+    object-fit: cover;  /* Ensure the image covers the area while maintaining aspect ratio */
     border-radius: 10px;
     margin-top: 10px;
 }
@@ -75,8 +84,14 @@ a:hover {
     border-radius: 10px;
 }
 
-.ingredients, .instructions, .description {
+.recipe-details p {
+    font-weight: bold;
+    text-align: center;
+}
+
+.description, .ingredients, .instructions {
     margin-top: 20px;
+    text-align: center; /* Center align titles */
 }
 
 .ingredients ul {
@@ -106,4 +121,11 @@ a:hover {
 
 .enter-link:hover, .recipe-link:hover {
     background-color: #555;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .recipe {
+        width: 100%; /* Full width on smaller screens */
+    }
 }

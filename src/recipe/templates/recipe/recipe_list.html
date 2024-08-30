@@ -9,7 +9,7 @@
     <header>
         <h1>Recipe List</h1>
     </header>
-    <div class="container">
+    <div class="container recipe-list">
         {% for recipe in recipes %}
         <div class="recipe">
             <h2><a href="{% url 'recipe:recipe_detail' recipe.id %}" class="recipe-link">{{ recipe.name }}</a></h2>
