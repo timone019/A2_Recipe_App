@@ -139,3 +139,8 @@ cython_debug/
 
 # Ignore virtual environment
 myenv/
+
+# Static files
+src/static/
+src/staticfiles/
+src/recipe/static/
