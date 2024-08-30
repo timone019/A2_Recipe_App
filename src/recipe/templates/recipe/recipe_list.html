@@ -13,11 +13,10 @@
         {% for recipe in recipes %}
         <div class="recipe">
             <h2><a href="{% url 'recipe:recipe_detail' recipe.id %}" class="recipe-link">{{ recipe.name }}</a></h2>
-            <br>            
             <img src="{{ recipe.pic.url }}" alt="{{ recipe.name }}" class="recipe-image">
             <p>Cooking Time: {{ recipe.cooking_time }} minutes</p>
             <p>Difficulty: {{ recipe.difficulty }}</p>
-            <p>Description: {{ recipe.description|slice:":100" }}...</p>
+            <p>{{ recipe.description|slice:":100" }}...</p>
         </div>
         {% endfor %}
     </div>

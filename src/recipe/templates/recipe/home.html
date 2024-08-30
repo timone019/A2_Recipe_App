@@ -9,9 +9,8 @@
 <body>
     <div class="home-container">
         <h1>Welcome to our Recipe App</h1>
-        <br>
-        <img src="{% static 'recipe/images/recipeHome.jpeg' %}" alt="home" width="900" height="600">
-        <br>
+        <p>Discover delicious recipes and improve your cooking skills.</p>
+        <img src="{% static 'recipe/images/recipeHome.jpeg' %}" alt="home" class="recipe-detail-image">
         <a href="{% url 'recipe:recipe_list' %}" class="enter-link">Enter Recipe List</a>
     </div>
 </body>
