@@ -143,4 +143,3 @@ myenv/
 # Static files
 src/static/
 src/staticfiles/
-src/recipe/static/
