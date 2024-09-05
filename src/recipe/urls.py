@@ -7,4 +7,5 @@ urlpatterns = [
     path('', home, name='home'),
     path('recipes/', recipe_list, name='recipe_list'),
     path('recipe/<int:recipe_id>/', recipe_detail, name='recipe_detail'),
+    # path('recipe/', success, name='success'),
 ]

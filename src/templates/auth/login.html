@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+
+<body>
+    <h1>Login</h1>
+    {% comment %} Print heading {% endcomment %}
+    
+    {% comment %} Check for error message {% endcomment %}
+    {% if error_message %}
+        <p>{{ error_message }}</p>
+    {% endif %}
+    
+    {% comment %} Print form {% endcomment %}
+    <form action="" method="POST">
+        {% comment %} Add Django security token {% endcomment %}
+        {% csrf_token %}
+        
+        {% comment %} Print form received from view {% endcomment %}
+        {{ form }}
+        
+        {% comment %} Add button {% endcomment %}
+        <button type="submit">Login</button>
+    </form>
+</body>
+
+</html>
