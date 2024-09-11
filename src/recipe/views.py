@@ -4,6 +4,8 @@ from .models import Recipe
 #to protect function-based view
 from django.contrib.auth.decorators import login_required #to access Book model
 
+from .forms import RecipeSearchForm
+
 # Create your views here.
 
 def home(request):
@@ -12,8 +14,21 @@ def home(request):
 
 @login_required
 def recipe_list(request):
+    # create an instance of RecipeSearchForm defined in recipe/forms.py
+    form = RecipeSearchForm(request.POST or None)
     recipes = Recipe.objects.all()
-    return render(request, 'recipe/recipe_list.html', {'recipes': recipes})
+    
+    if form.is_valid():
+        recipe_title = form.cleaned_data.get('recipe_title')
+        recipes = recipes.filter(name__icontains=recipe_title)
+    
+    #pack up data to be sent to template in the context dictionary
+    context={
+            'form': form,
+            'recipes': recipes
+    }
+    
+    return render(request, 'recipe/recipe_list.html', context)
 
 @login_required
 def recipe_detail(request, recipe_id):
@@ -24,4 +39,5 @@ def recipe_detail(request, recipe_id):
 # def success(request):
 #     #do nothing, simply display page    
 #     return render(request, 'recipe/success.html')
+
 
