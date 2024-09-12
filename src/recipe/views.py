@@ -21,17 +21,32 @@ def recipe_list(request):
     chart = None #initialize 
     chart_type = None #initialize
     recipes = Recipe.objects.all()
+    filtered_recipes = Recipe.objects.none() # Initialize filtered_recipes as an empty queryset
     
-    # Convert all recipes to a DataFrame for the chart
-    all_recipes_df = pd.DataFrame(recipes.values('name', 'cooking_time', 'difficulty'))
+    # if there are recipes,  Convert all recipes to a DataFrame for the chart
+    if recipes.exists():
+        all_recipes_df = pd.DataFrame(recipes.values('name', 'cooking_time', 'difficulty'))
+    else:
+        all_recipes_df = pd.DataFrame()
     
     if form.is_valid():
         recipe_title = form.cleaned_data.get('recipe_title')
         chart_type = form.cleaned_data.get('chart_type')
+        show_all = form.cleaned_data.get('show_all')
+
+        if show_all:
+            recipe_df_html = all_recipes_df.to_html(classes='table table-striped', index=False)  # Convert DataFrame to HTML
+        else:
+            # Apply filter to extract data
+            filtered_recipes = Recipe.objects.filter(name__icontains=recipe_title)
+            if filtered_recipes.exists():
+                recipes = filtered_recipes  # Update recipes to use the filtered results
+                recipe_df = pd.DataFrame(filtered_recipes.values('id', 'name', 'cooking_time', 'difficulty'))
+                recipe_df_html = recipe_df.to_html(classes='table table-striped', index=False)  # Convert DataFrame to HTML
+                
+        # Debugging prints 
         print(f"Search Query: {recipe_title}, Chart Type: {chart_type}")  # Print the search query & chart type
         print(f"Recipe Title: {recipe_title}")  # Print the recipe title
-        # Apply filter to extract data
-        filtered_recipes = Recipe.objects.filter(name__icontains=recipe_title)
         
         # Exploring QuerySets
         print('Exploring querysets:')
@@ -56,13 +71,6 @@ def recipe_list(request):
         except Recipe.DoesNotExist:
             print('Recipe with id=1 does not exist') 
 
-        # Convert the filtered QuerySet to a Pandas DataFrame
-        if filtered_recipes.exists():
-            recipe_df = pd.DataFrame(filtered_recipes.values('id', 'name', 'cooking_time', 'difficulty')) 
-            print(recipe_df)
-            recipe_df_html = recipe_df.to_html(classes='table table-striped', index=False)  # Convert DataFrame to HTML
-            recipes = filtered_recipes # Update recipes to use the filtered results
-            
     # Generate the chart using all recipes
     chart = get_chart(chart_type, all_recipes_df, labels=all_recipes_df['name'].values)  
 
@@ -81,10 +89,4 @@ def recipe_list(request):
 def recipe_detail(request, recipe_id):
     recipe = get_object_or_404(Recipe, id=recipe_id)
     return render(request, 'recipe/recipe_detail.html', {'recipe': recipe})
-
-
-# def success(request):
-#     #do nothing, simply display page    
-#     return render(request, 'recipe/success.html')
-
 

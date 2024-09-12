@@ -9,3 +9,4 @@ CHART__CHOICES = (          #specify choices as a tuple
 class RecipeSearchForm(forms.Form): 
     recipe_title= forms.CharField(max_length=120)
     chart_type = forms.ChoiceField(choices=CHART__CHOICES)
+    show_all = forms.BooleanField(required=False, initial=True, label="Show All")
