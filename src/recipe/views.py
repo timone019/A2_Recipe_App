@@ -2,30 +2,69 @@ from django.shortcuts import render, get_object_or_404
 from .models import Recipe
 
 #to protect function-based view
-from django.contrib.auth.decorators import login_required #to access Book model
-
+from django.contrib.auth.decorators import login_required #to access Recipe model
+import pandas as pd
 from .forms import RecipeSearchForm
+
 
 # Create your views here.
 
 def home(request):
-    # recipes = Recipe.objects.all()
     return render(request, 'recipe/home.html')
 
 @login_required
 def recipe_list(request):
     # create an instance of RecipeSearchForm defined in recipe/forms.py
     form = RecipeSearchForm(request.POST or None)
+    recipe_df_html = None #initialize
+    chart = None #initialize 
     recipes = Recipe.objects.all()
     
     if form.is_valid():
         recipe_title = form.cleaned_data.get('recipe_title')
-        recipes = recipes.filter(name__icontains=recipe_title)
-    
+        chart_type = form.cleaned_data.get('chart_type')
+        print(f"Search Query: {recipe_title}, Chart Type: {chart_type}")  # Print the search query & chart type
+        print(f"Recipe Title: {recipe_title}")  # Print the recipe title
+        # Apply filter to extract data
+        filtered_recipes = Recipe.objects.filter(name__icontains=recipe_title)
+        
+        # Exploring QuerySets
+        print('Exploring querysets:')
+        
+        print('Case 1: Output of Recipe.objects.all()')
+        qs = Recipe.objects.all()
+        print(qs)
+        
+        print('Case 2: Output of Recipe.objects.filter(name__icontains=recipe_title)')
+        print(filtered_recipes)
+        
+        print('Case 3: Output of qs.values()')
+        print(filtered_recipes.values())
+        
+        print('Case 4: Output of qs.values_list()')
+        print(filtered_recipes.values_list())
+        
+        print('Case 5: Output of Recipe.objects.get(id=1)')
+        try:
+            obj = Recipe.objects.get(id=1)
+            print(obj)
+        except Recipe.DoesNotExist:
+            print('Recipe with id=1 does not exist') 
+
+        # Convert the filtered QuerySet to a Pandas DataFrame
+        if filtered_recipes.exists():
+            recipe_df = pd.DataFrame(filtered_recipes.values('id', 'name', 'cooking_time', 'difficulty', 'description', 'instructions', 'pic'))
+            print(recipe_df)
+            recipe_df_html = recipe_df.to_html(classes='table table-striped')  # Convert DataFrame to HTML
+            recipes = filtered_recipes # Update recipes to use the filtered results
+            
+
     #pack up data to be sent to template in the context dictionary
     context={
             'form': form,
-            'recipes': recipes
+            'recipes': recipes,
+            'recipe_df_html': recipe_df_html, # Include the DataFrame HTML in the context
+            'chart': chart # Include the chart in the context
     }
     
     return render(request, 'recipe/recipe_list.html', context)

@@ -23,8 +23,15 @@
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" >search</button>
-
     </form>
+
+    {% if recipe_df_html %}
+        {{ recipe_df_html|safe }} 
+        <br>
+        <img src="data:image/png;base64, {{chart|safe}}"> 
+    {% else %}
+        <h3> no data</h3>
+    {% endif %}
 
     <div class="container recipe-list">
         {% for recipe in recipes %}
