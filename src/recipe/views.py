@@ -5,6 +5,7 @@ from .models import Recipe
 from django.contrib.auth.decorators import login_required #to access Recipe model
 import pandas as pd
 from .forms import RecipeSearchForm
+from .utils import get_chart
 
 
 # Create your views here.
@@ -18,7 +19,11 @@ def recipe_list(request):
     form = RecipeSearchForm(request.POST or None)
     recipe_df_html = None #initialize
     chart = None #initialize 
+    chart_type = None #initialize
     recipes = Recipe.objects.all()
+    
+    # Convert all recipes to a DataFrame for the chart
+    all_recipes_df = pd.DataFrame(recipes.values('name', 'cooking_time', 'difficulty'))
     
     if form.is_valid():
         recipe_title = form.cleaned_data.get('recipe_title')
@@ -53,11 +58,13 @@ def recipe_list(request):
 
         # Convert the filtered QuerySet to a Pandas DataFrame
         if filtered_recipes.exists():
-            recipe_df = pd.DataFrame(filtered_recipes.values('id', 'name', 'cooking_time', 'difficulty', 'description', 'instructions', 'pic'))
+            recipe_df = pd.DataFrame(filtered_recipes.values('id', 'name', 'cooking_time', 'difficulty')) 
             print(recipe_df)
-            recipe_df_html = recipe_df.to_html(classes='table table-striped')  # Convert DataFrame to HTML
+            recipe_df_html = recipe_df.to_html(classes='table table-striped', index=False)  # Convert DataFrame to HTML
             recipes = filtered_recipes # Update recipes to use the filtered results
             
+    # Generate the chart using all recipes
+    chart = get_chart(chart_type, all_recipes_df, labels=all_recipes_df['name'].values)  
 
     #pack up data to be sent to template in the context dictionary
     context={
