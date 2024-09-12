@@ -71,7 +71,8 @@ def recipe_list(request):
             'form': form,
             'recipes': recipes,
             'recipe_df_html': recipe_df_html, # Include the DataFrame HTML in the context
-            'chart': chart # Include the chart in the context
+            'chart': chart, # Include the chart in the context
+            'chart_type': chart_type # Include the chart type in the context
     }
     
     return render(request, 'recipe/recipe_list.html', context)
