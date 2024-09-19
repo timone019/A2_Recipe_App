@@ -17,11 +17,13 @@
     </form>
 
     {% if recipe_df_html %}
-        {{ recipe_df_html|safe }} 
-        <br>
-        <img src="data:image/png;base64, {{chart|safe}}">
+        <div class="center-content">
+            {{ recipe_df_html|safe }} 
+            <br>
+            <img src="data:image/png;base64, {{chart|safe}}">
+        </div>
     {% else %}
-        <h3>no data</h3>
+        <h3 class="no-data">no data</h3>
     {% endif %}
 
     <div class="container recipe-list">

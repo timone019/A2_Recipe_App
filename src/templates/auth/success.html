@@ -1,20 +1,15 @@
+{% extends 'base/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Success!</title>
-</head>
+{% block title %}Success{% endblock %}
 
-<body>
-    <a href="{% url 'recipe:home' %}">Home</a>
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'auth/css/success.css' %}">
+{% endblock %}
 
-    <h1>You've Successfully Logged Out!</h1>
-    <hr>
-    <!-- Your content here -->
-</body>
-
-</html>
+{% block content %}
+    <div class="success-container">
+        <h1>You've Successfully Logged Out!</h1>
+        <a href="{% url 'recipe:recipe_home' %}">Home</a>
+    </div>
+{% endblock %}

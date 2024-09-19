@@ -1,0 +1,32 @@
+/* success.css */
+
+/* Success Page Styles */
+.success-container {
+    width: 80%;
+    max-width: 400px; /* Limit the maximum width */
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.success-container h1 {
+    margin-bottom: 20px;
+}
+
+.success-container a {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.success-container a:hover {
+    background-color: #555;
+}
