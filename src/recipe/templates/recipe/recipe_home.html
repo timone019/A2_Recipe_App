@@ -1,0 +1,19 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}Recipe App{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'recipe/css/recipe-home.css' %}">
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'recipe/js/home.js' %}" defer></script>
+{% endblock %}
+
+{% block content %}
+    <div class="home-container">
+        <h1>Welcome to our Recipe App</h1>
+        <p>Discover delicious recipes and improve your cooking skills.</p>
+        <img src="{% static 'recipe/images/recipeHome.jpeg' %}" alt="home" class="recipe-detail-image">
+        <a href="{% url 'recipe:recipe_list' %}" class="enter-link btn">Enter Recipe List</a>
+    </div>
+{% endblock %}

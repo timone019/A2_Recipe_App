@@ -11,7 +11,7 @@ from .utils import get_chart
 # Create your views here.
 
 def home(request):
-    return render(request, 'recipe/home.html')
+    return render(request, 'recipe/recipe_home.html')
 
 @login_required
 def recipe_list(request):

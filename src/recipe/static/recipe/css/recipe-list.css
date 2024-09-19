@@ -1,3 +1,5 @@
+/* recipe-list.css */
+
 /* General Styles */
 body {
     font-family: 'Helvetica Neue', Arial, sans-serif;
@@ -25,7 +27,7 @@ a:hover {
     color: #555;
 }
 
-.container, .home-container {
+.container {
     width: 80%;
     margin: 20px auto;
     background-color: #fff;
@@ -74,41 +76,8 @@ a:hover {
     margin-top: 10px;
 }
 
-/* Recipe Detail Styles */
-.recipe-detail-image {
-    display: block;
-    margin: 20px auto;
-    max-width: 600px;
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-}
-
-.recipe-details p {
-    font-weight: bold;
-    text-align: center;
-}
-
-.description, .ingredients, .instructions {
-    margin-top: 20px;
-    text-align: center; /* Center align titles */
-}
-
-.ingredients ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.ingredients li {
-    background-color: #f9f9f9;
-    margin: 5px 0;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
 /* Link Styles */
-.enter-link, .recipe-link {
+.recipe-link {
     display: inline-block;
     margin-top: 20px;
     padding: 10px 20px;
@@ -119,9 +88,7 @@ a:hover {
     transition: background-color 0.3s ease;
 }
 
-
-
-.enter-link:hover, .recipe-link:hover {
+.recipe-link:hover {
     background-color: #555;
 }
 
