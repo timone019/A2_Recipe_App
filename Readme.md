@@ -15,6 +15,30 @@ See Live Site: https://timone019.pythonanywhere.com
 - **User Authentication**: Secure login and registration for users.
   
 - **Responsive Design**: Mobile-friendly interface.
+  
+## Tech Stack
+
+- **Frontend**:
+  - HTML
+  - CSS
+  - JavaScript
+
+- **Backend**:
+  - Python
+  - Django
+
+- **Database**:
+  - PostgreSQL
+
+- **Deployment**:
+  - PythonAnywhere
+  - Gunicorn
+  - Whitenoise
+
+- **Other Libraries**:
+  - Matplotlib
+  - Pandas
+  - Pillow
 
 ## Screenshots
 
