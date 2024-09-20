@@ -141,5 +141,4 @@ cython_debug/
 myenv/
 
 # Static files
-src/static/
-src/staticfiles/
+src/staticfiles/.DS_Store

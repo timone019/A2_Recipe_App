@@ -1,33 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base/base.html' %}
+{% load static %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-</head>
+{% block title %}Login{% endblock %}
 
-<body>
-    <h1>Login</h1>
-    {% comment %} Print heading {% endcomment %}
-    
-    {% comment %} Check for error message {% endcomment %}
-    {% if error_message %}
-        <p>{{ error_message }}</p>
-    {% endif %}
-    
-    {% comment %} Print form {% endcomment %}
-    <form action="" method="POST">
-        {% comment %} Add Django security token {% endcomment %}
-        {% csrf_token %}
-        
-        {% comment %} Print form received from view {% endcomment %}
-        {{ form }}
-        
-        {% comment %} Add button {% endcomment %}
-        <button type="submit">Login</button>
-    </form>
-</body>
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'auth/css/login.css' %}">
+{% endblock %}
 
-</html>
+{% block content %}
+    <div class="login-container">
+        <h1>Login</h1>
+        {% if error_message %}
+            <p>{{ error_message }}</p>
+        {% endif %}
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Login</button>
+        </form>
+    </div>
+{% endblock %}

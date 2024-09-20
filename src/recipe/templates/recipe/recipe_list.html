@@ -1,19 +1,10 @@
+{% extends 'base/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title>Recipe Home</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'recipe/css/styles.css' %}">
-</head>
-
-<body>
-
-    {% if user.is_authenticated %}
-        <a href="{% url 'recipe:home' %}">Home</a>
-        <a href="{% url 'logout' %}">Logout</a>
-    {% endif %}
-
+{% block title %}Recipe Home{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'recipe/css/recipe-list.css' %}">
+{% endblock %}
+{% block content %}
     <header>
         <h1>Recipe List</h1>
     </header>
@@ -22,15 +13,17 @@
     <form action="" method="POST">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" >search</button>
+        <button type="submit">search</button>
     </form>
 
     {% if recipe_df_html %}
-        {{ recipe_df_html|safe }} 
-        <br>
-        <img src="data:image/png;base64, {{chart|safe}}"> 
+        <div class="center-content">
+            {{ recipe_df_html|safe }} 
+            <br>
+            <img src="data:image/png;base64, {{chart|safe}}">
+        </div>
     {% else %}
-        <h3> no data</h3>
+        <h3 class="no-data">no data</h3>
     {% endif %}
 
     <div class="container recipe-list">
@@ -44,5 +37,4 @@
         </div>
         {% endfor %}
     </div>
-</body>
-</html>
+{% endblock %}

@@ -1,38 +1,65 @@
-/* General Styles */
-body {
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-    color: #333;
-    line-height: 1.6;
-}
+/* recipe-list.css */
 
-header {
-    background-color: #333;
-    color: #fff;
-    padding: 20px 0;
-    text-align: center;
+/* Center the form */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin-bottom: 20px;
 }
 
-a {
-    color: #333;
-    text-decoration: none;
+form button {
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px; /* Add some space between the form fields and the button */
 }
 
-a:hover {
-    color: #555;
+form button:hover {
+    background-color: #555;
 }
 
-.container, .home-container {
-    width: 80%;
-    margin: 20px auto;
-    background-color: #fff;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+/* Center the "no data" message */
+.no-data {
+    text-align: center;
+    font-size: 18px;
+    color: #666;
+    margin-top: 20px;
+}
+
+/* Center the table and chart */
+.center-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.center-content table {
+    margin: 20px 0;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.center-content table, .center-content th, .center-content td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.center-content th {
+    background-color: #f2f2f2;
+    text-align: left;
+}
+
+.center-content img {
+    max-width: 100%;
+    height: auto;
     border-radius: 10px;
-    text-align: center; /* Center align content */
+    margin-top: 20px;
 }
 
 /* Recipe List Styles */
@@ -74,41 +101,8 @@ a:hover {
     margin-top: 10px;
 }
 
-/* Recipe Detail Styles */
-.recipe-detail-image {
-    display: block;
-    margin: 20px auto;
-    max-width: 600px;
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-}
-
-.recipe-details p {
-    font-weight: bold;
-    text-align: center;
-}
-
-.description, .ingredients, .instructions {
-    margin-top: 20px;
-    text-align: center; /* Center align titles */
-}
-
-.ingredients ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.ingredients li {
-    background-color: #f9f9f9;
-    margin: 5px 0;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
 /* Link Styles */
-.enter-link, .recipe-link {
+.recipe-link {
     display: inline-block;
     margin-top: 20px;
     padding: 10px 20px;
@@ -119,9 +113,7 @@ a:hover {
     transition: background-color 0.3s ease;
 }
 
-
-
-.enter-link:hover, .recipe-link:hover {
+.recipe-link:hover {
     background-color: #555;
 }
 
