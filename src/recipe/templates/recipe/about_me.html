@@ -1,0 +1,35 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block title %}About Me{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'recipe/css/about_me.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="about-me-container">
+    <h1>About Me</h1>
+    <p>Hello! I'm Sam My, a passionate developer with a love for creating innovative solutions. With a background in Full Stack Web Development, I have honed my skills in various programming languages and frameworks. My journey in the tech world has been driven by curiosity and a desire to make a positive impact through technology.</p>
+    
+    <h2>Portfolio</h2>
+    <p>Check out my portfolio to see some of the projects I've worked on:</p>
+    <ul>
+        <li><a href="https://sam-my.com" target="_blank">sam-my.com</a></li>
+    </ul>
+    
+    <h2>Contact Information</h2>
+    <p>Feel free to reach out to me through the following channels:</p>
+    <ul>
+        <li>Email: <a href="mailto:my.samnang@gmail.com">my.samnang@gmail.com</a></li>
+        <li>LinkedIn: <a href="https://www.linkedin.com/in/sam-my-78934046/" target="_blank">My LinkedIn</a></li>
+    </ul>
+    
+    <h2>GitHub</h2>
+    <p>Explore my GitHub repositories to see my contributions and open-source projects:</p>
+    <ul>
+        <li><a href="https://github.com/timone019/portfolio" target="_blank">My GitHub</a></li>
+    </ul>
+    
+</div>
+{% endblock %}

@@ -11,8 +11,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import warnings
 from decouple import config
-import os
 
 # Heroku: Update database configuration from $DATABASE_URL.
 import dj_database_url
@@ -30,7 +30,7 @@ SECRET_KEY = config('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DJANGO_DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = config('DJANGO_ALLOWED_HOSTS', default='').split(',')
+ALLOWED_HOSTS = config('DJANGO_ALLOWED_HOSTS', default='localhost').split(',') + []
 
 # Application definition
 
@@ -82,14 +82,11 @@ WSGI_APPLICATION = 'recipe_project.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(conn_max_age=500, default=f'sqlite:///{BASE_DIR / "db.sqlite3"}')
 }
 
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
+if not DATABASES['default']:
+    warnings.warn("No DATABASE_URL environment variable set, and so no databases setup", RuntimeWarning)
 
 
 # Password validation

@@ -1,0 +1,50 @@
+/* about_me.css */
+
+.about-me-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.about-me-container h1, .about-me-container h2 {
+    color: #333;
+    text-align: center;
+}
+
+.about-me-container p, .about-me-container ul {
+    color: #555;
+    line-height: 1.6;
+}
+
+.about-me-container a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.about-me-container a:hover {
+    text-decoration: underline;
+}
+
+.about-me-container ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.about-me-container ul li {
+    margin-bottom: 10px;
+}
+
+.about-me-container ul li a {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #f4f4f4;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.about-me-container ul li a:hover {
+    background-color: #e0e0e0;
+}

@@ -90,3 +90,5 @@ def recipe_detail(request, recipe_id):
     recipe = get_object_or_404(Recipe, id=recipe_id)
     return render(request, 'recipe/recipe_detail.html', {'recipe': recipe})
 
+def about(request):
+    return render(request, 'recipe/about_me.html')
