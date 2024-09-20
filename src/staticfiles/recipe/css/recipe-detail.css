@@ -1,0 +1,34 @@
+/* recipe-detail.css */
+
+/* Recipe Detail Styles */
+.recipe-detail-image {
+    display: block;
+    margin: 20px auto;
+    max-width: 600px;
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.recipe-details p {
+    font-weight: bold;
+    text-align: center;
+}
+
+.description, .ingredients, .instructions {
+    margin-top: 20px;
+    text-align: center; /* Center align titles */
+}
+
+.ingredients ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.ingredients li {
+    background-color: #f9f9f9;
+    margin: 5px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
