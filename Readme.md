@@ -2,6 +2,8 @@
 
 Welcome to the Recipe Application! This app allows users to browse, search, and manage a collection of recipes. Users can add new recipes, view details, and edit existing ones.
 
+See Live Site: https://timone019.pythonanywhere.com
+
 ## Features
 
 - **Recipe Management**: Create, update, and delete recipes.
@@ -16,8 +18,8 @@ Welcome to the Recipe Application! This app allows users to browse, search, and 
 
 ## Screenshots
 
-![Home Page](screenshots/home_page.png)
-![Recipe Detail](screenshots/recipe_detail.png)
+![Home Page](src/media/screenshots/recipeHomeScreenshot.png)
+![Recipe Detail](src/media/screenshots/recipeDetailsScreenshot.png)
 
 ## Installation
 
