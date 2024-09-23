@@ -1,7 +1,13 @@
-from django.test import TestCase
+import os
+from django.test import TestCase, Client
+from django.urls import reverse
+from django.contrib.auth.models import User
 from .models import Recipe
-from ingredient.models import Ingredient  # Import Ingredient model
+from .forms import RecipeSearchForm
+from dotenv import load_dotenv
 
+# Load environment variables from .env file
+load_dotenv()
 
 class RecipeModelTest(TestCase):
     def setUp(self):
@@ -34,3 +40,57 @@ class RecipeModelTest(TestCase):
         self.assertEqual(
             self.recipe.difficulty, "Easy"
         )  # Adjust the expected value based on your logic
+
+class RecipeSearchFormTest(TestCase):
+    def test_form_valid_data(self):
+        form = RecipeSearchForm(data={
+            'recipe_title': 'Pasta',
+            'chart_type': '#1',
+            'show_all': True
+        })
+        self.assertTrue(form.is_valid())
+
+    def test_form_invalid_data(self):
+        form = RecipeSearchForm(data={})
+        self.assertFalse(form.is_valid())
+        self.assertEqual(len(form.errors), 2)  # recipe_title and chart_type are required
+
+class RecipeViewsTest(TestCase):
+    def setUp(self):
+        self.client = Client()
+        self.user = User.objects.create_user(
+            username=os.getenv('TEST_USER_USERNAME'),
+            password=os.getenv('TEST_USER_PASSWORD')
+        )
+        self.client.login(
+            username=os.getenv('TEST_USER_USERNAME'),
+            password=os.getenv('TEST_USER_PASSWORD')
+        )
+        self.recipe = Recipe.objects.create(
+            name="Pasta",
+            cooking_time=30,
+        )
+        self.recipe.ingredients.create(name="Tomato", quantity=1.00)
+        self.recipe.ingredients.create(name="Pasta", quantity=2.00)
+        self.recipe_list_url = reverse('recipe:recipe_list')
+        self.recipe_detail_url = reverse('recipe:recipe_detail', args=[self.recipe.id])
+
+    def test_recipe_list_view(self):
+        response = self.client.get(self.recipe_list_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'recipe/recipe_list.html')
+
+    def test_recipe_list_view_post(self):
+        response = self.client.post(self.recipe_list_url, {
+            'recipe_title': 'Pasta',
+            'chart_type': '#1',
+            'show_all': True
+        })
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Pasta')
+
+    def test_recipe_detail_view(self):
+        response = self.client.get(self.recipe_detail_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'recipe/recipe_detail.html')
+        self.assertContains(response, 'Pasta')
