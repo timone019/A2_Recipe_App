@@ -71,11 +71,25 @@ def recipe_list(request):
         except Recipe.DoesNotExist:
             print('Recipe with id=1 does not exist') 
 
-    # Generate the chart using all recipes if they exist
-    if not all_recipes_df.empty and 'name' in all_recipes_df.columns:
-        chart = get_chart(chart_type, all_recipes_df, labels=all_recipes_df['name'].values)
-    else:
-        chart = None  # or provide a default chart/message
+    # Generate the chart if we have valid data
+    chart = None
+    error_message = None
+    
+    try:
+        if all_recipes_df.empty:
+            error_message = "No recipe data available for chart generation."
+        elif 'name' not in all_recipes_df.columns or 'cooking_time' not in all_recipes_df.columns:
+            error_message = "Required data columns are missing for chart generation."
+        elif chart_type not in ['#1', '#2', '#3']:
+            error_message = f"Invalid chart type: {chart_type}"
+        else:
+            chart = get_chart(chart_type, all_recipes_df, labels=all_recipes_df['name'].values)
+    except Exception as e:
+        error_message = f"Error generating chart: {str(e)}"
+        print(f"Chart generation error: {error_message}")
+    
+    if error_message:
+        print(error_message)  # Log the error for debugging
 
     #pack up data to be sent to template in the context dictionary
     context={

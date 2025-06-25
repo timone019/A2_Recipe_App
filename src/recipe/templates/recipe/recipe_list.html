@@ -20,10 +20,17 @@
         <div class="center-content">
             {{ recipe_df_html|safe }} 
             <br>
-            <img src="data:image/png;base64, {{chart|safe}}">
+            {% if chart %}
+                <img src="data:image/png;base64, {{chart|safe}}" alt="Recipe Chart">
+            {% else %}
+                <div class="chart-error">
+                    <p>⚠️ Could not generate chart. This might be because there's not enough data or an error occurred.</p>
+                    <p>Try selecting a different chart type or adding more recipes.</p>
+                </div>
+            {% endif %}
         </div>
     {% else %}
-        <h3 class="no-data">no data</h3>
+        <h3 class="no-data">No recipes found matching your search.</h3>
     {% endif %}
 
     <div class="container recipe-list">
