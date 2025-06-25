@@ -71,8 +71,11 @@ def recipe_list(request):
         except Recipe.DoesNotExist:
             print('Recipe with id=1 does not exist') 
 
-    # Generate the chart using all recipes
-    chart = get_chart(chart_type, all_recipes_df, labels=all_recipes_df['name'].values)  
+    # Generate the chart using all recipes if they exist
+    if not all_recipes_df.empty and 'name' in all_recipes_df.columns:
+        chart = get_chart(chart_type, all_recipes_df, labels=all_recipes_df['name'].values)
+    else:
+        chart = None  # or provide a default chart/message
 
     #pack up data to be sent to template in the context dictionary
     context={
