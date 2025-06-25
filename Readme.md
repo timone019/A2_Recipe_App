@@ -57,36 +57,50 @@ To get started with this project, follow these steps:
 
 ### Steps
 
-1. Clone the repository:
+1. **Clone the repository** and navigate to the project directory:
    ```bash
    git clone https://github.com/your-username/recipe-app.git
    cd recipe-app
    ```
-2. Create and activate a virtual environment:
+
+2. **Navigate to the src directory** (where the Django project is located):
+   ```bash
+   cd src
+   ```
+
+3. **Set up the virtual environment**:
    ```bash
    python -m venv venv
-   source venv/bin/activate
-   # On Windows use `venv\Scripts\activate`
+   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
    ```
-3. Install the required dependencies:
+
+4. **Install dependencies** (from the project root directory):
    ```bash
+   cd ..  # Go back to the project root
    pip install -r requirements.txt
+   cd src  # Return to the src directory for the next steps
    ```
-4. Apply migrations:
+
+5. **Apply database migrations**:
    ```bash
    python manage.py migrate
    ```
-5. Create a superuser to access the admin panel:
+
+6. **Create a superuser** (admin account):
    ```bash
    python manage.py createsuperuser
    ```
-6. Run the development server:
+
+7. **Run the development server**:
    ```bash
    python manage.py runserver
    ```
-7. Open your browser and navigate to http://localhost:8000 to start using the app.
 
-8. To access admin panel, go to http://localhost:8000/admin
+8. **Access the application**:
+   - Main site: http://localhost:8000/
+   - Admin panel: http://localhost:8000/admin/
+
+**Note**: The project uses a `src/` directory structure where the Django project lives. Most commands need to be run from within the `src/` directory after activation of the virtual environment.
 
 ## Usage
 - Browse Recipes: View a list of all recipes.
