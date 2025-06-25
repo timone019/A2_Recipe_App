@@ -1,32 +1,72 @@
 /* success.css */
+:root {
+    --primary-color: #4a6fa5;
+    --secondary-color: #6c757d;
+    --success-color: #28a745;
+    --light-color: #f8f9fa;
+    --border-radius: 5px;
+}
 
-/* Success Page Styles */
 .success-container {
-    width: 80%;
-    max-width: 400px; /* Limit the maximum width */
-    margin: 20px auto;
-    background-color: #fff;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 4rem auto;
+    padding: 2rem;
+    background: white;
     border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
 .success-container h1 {
-    margin-bottom: 20px;
+    color: var(--success-color);
+    margin-bottom: 2rem;
+    font-size: 2rem;
+}
+
+.success-message {
+    font-size: 1.25rem;
+    color: var(--secondary-color);
+    margin-bottom: 2rem;
+    line-height: 1.6;
 }
 
 .success-container a {
     display: inline-block;
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #333;
-    color: #fff;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: white;
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: var(--border-radius);
     text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
 }
 
 .success-container a:hover {
-    background-color: #555;
+    background-color: #3a5a80;
+    color: white;
+    text-decoration: none;
+}
+
+.btn-block {
+    display: block;
+    width: 100%;
+    margin: 1rem 0;
+}
+
+@media (max-width: 768px) {
+    .success-container {
+        margin: 2rem 1rem;
+        padding: 1.5rem;
+    }
+    
+    .success-container h1 {
+        font-size: 1.75rem;
+    }
+    
+    .success-message {
+        font-size: 1.1rem;
+    }
 }

@@ -1,50 +1,86 @@
-from django.shortcuts import render, redirect
-# Django authentication libraries
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
-# Django Form for authentication
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_http_methods
 
 # define a function view called login_view that takes a request from user
 
 
+@require_http_methods(["GET", "POST"])
 def login_view(request):
-    # initialize:
-    # error_message to None
-    error_message = None
-    # form object with username and password fields
-    form = AuthenticationForm()
+    """Handle user login"""
+    if request.user.is_authenticated:
+        return redirect('recipe:recipe_list')
 
-    # when user hits "login" button, then POST request is generated
     if request.method == 'POST':
-        # read the data sent by the form via POST request
-        form = AuthenticationForm(data=request.POST)
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            
+            if user is not None:
+                login(request, user)
+                messages.success(request, f'Welcome back, {username}!')
+                return redirect('recipe:recipe_list')
+            else:
+                messages.error(request, 'Invalid username or password.')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = AuthenticationForm()
 
-        # check if form is valid
-        if form.is_valid():                                
-            username=form.cleaned_data.get('username')      #read username
-            password = form.cleaned_data.get('password')    #read password
-
-            #use Django authenticate function to validate the user
-            user=authenticate(username=username, password=password)
-            if user is not None:                    #if user is authenticated
-            #then use pre-defined Django function to login
-                login(request, user)                
-                return redirect('recipe:recipe_list') #& send the user to desired page
-        else:                                               #in case of error
-            error_message ='ooops.. something went wrong'   #print error message
-
-    #prepare data to send from view to template
-    context ={                                             
-        'form': form,                                 #send the form data
-        'error_message': error_message                     #and the error_message
-    }
-    #load the login page using "context" information
-    return render(request, 'auth/login.html', context)
+    return render(request, 'auth/login.html', {'form': form})
 
 #define a function view called logout_view that takes a request from user
-def logout_view(request):                                  
-    logout(request)             #the use pre-defined Django function to logout
-    return redirect('logout_success')
+@login_required
+def logout_view(request):
+    """Handle user logout"""
+    if request.method == 'POST' or request.method == 'GET':  # Handle both GET and POST
+        logout(request)
+        messages.success(request, 'You have been successfully logged out.')
+        return redirect('logout_success')
+    return redirect('recipe:recipe_list')
 
-def logout_success_view(request):  
-    return render(request, 'auth/success.html') #after logging out go to login form (or whichever page you want)
+
+def demo_login_view(request):
+    """View for demo user login"""
+    if request.user.is_authenticated:
+        return redirect('recipe:recipe_list')
+        
+    # Demo user credentials
+    demo_username = 'demo_user'
+    demo_password = 'demopassword123!@#'  # Strong password for demo
+    
+    # Check if demo user exists, create if not
+    if not User.objects.filter(username=demo_username).exists():
+        try:
+            User.objects.create_user(
+                username=demo_username,
+                email='demo@example.com',
+                password=demo_password,
+                is_active=True
+            )
+            messages.info(request, 'Demo account created successfully.')
+        except Exception as e:
+            messages.error(request, 'Failed to create demo account. Please contact support.')
+            return redirect('login')
+    
+    # Authenticate and login the demo user
+    user = authenticate(request, username=demo_username, password=demo_password)
+    
+    if user is not None:
+        login(request, user)
+        messages.success(request, 'You are now logged in as a demo user. Welcome!')
+        return redirect('recipe:recipe_list')
+    else:
+        messages.error(request, 'Failed to login as demo user. Please try again.')
+        return redirect('login')
+
+
+def logout_success_view(request):
+    """Display success message after logout"""
+    return render(request, 'auth/success.html')

@@ -1,46 +1,158 @@
 /* login.css */
+:root {
+    --primary-color: #4a6fa5;
+    --secondary-color: #6c757d;
+    --success-color: #28a745;
+    --light-color: #f8f9fa;
+    --border-radius: 5px;
+}
 
 .login-container {
-    width: 80%;
-    max-width: 400px; /* Limit the maximum width */
-    margin: 20px auto;
+    width: 90%;
+    max-width: 400px;
+    margin: 40px auto;
     background-color: #fff;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     text-align: center;
+    box-sizing: border-box; /* Ensure padding is included in width */
+    overflow: hidden; /* Prevent content from overflowing */
 }
 
 .login-container h1 {
-    margin-bottom: 20px;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
 }
 
-.login-container form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.login-container .alert {
+    margin-bottom: 1.5rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: var(--border-radius);
 }
 
-.login-container form input[type="text"],
-.login-container form input[type="password"] {
+.login-container .alert-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.login-container .alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.login-form {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
+    margin-bottom: 1.5rem;
 }
 
-.login-container button {
-    padding: 10px 20px;
-    background-color: #333;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
+.form-group {
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ced4da;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(74, 111, 165, 0.25);
+}
+
+.btn {
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: var(--border-radius);
+    transition: all 0.15s ease-in-out;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    text-decoration: none;
 }
 
-.login-container button:hover {
-    background-color: #555;
+.btn-block {
+    display: block;
+    width: 100%;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: #3a5a80;
+    border-color: #3a5a80;
+}
+
+.btn-outline-secondary {
+    color: var(--secondary-color);
+    background-color: transparent;
+    border: 1px solid var(--secondary-color);
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 0.75rem;
+    margin: 0;
+    display: block;
+    text-align: center;
+}
+
+.btn-outline-secondary:hover {
+    color: #fff;
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    text-decoration: none;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 1.5rem 0;
+    color: #6c757d;
+    white-space: nowrap; /* Prevent text wrapping */
+    overflow: hidden; /* Hide overflow */
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #dee2e6;
+    margin: 0 10px; /* Reduce margin for better fit */
+}
+
+/* Remove the specific margins since we're using a simpler approach */
+.divider:not(:empty)::before,
+.divider:not(:empty)::after {
+    margin: 0 10px;
+}
+
+.demo-info {
+    margin-top: 1.5rem;
+    font-size: 0.875rem;
+    color: var(--secondary-color);
 }

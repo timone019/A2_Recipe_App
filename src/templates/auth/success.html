@@ -9,7 +9,14 @@
 
 {% block content %}
     <div class="success-container">
-        <h1>You've Successfully Logged Out!</h1>
-        <a href="{% url 'recipe:recipe_home' %}">Home</a>
+        <h1>You've Successfully Logged Out</h1>
+        <div class="success-message">
+            <p>You have been successfully logged out of your account.</p>
+            <p>Thank you for using our Recipe App!</p>
+        </div>
+        <div class="button-group">
+            <a href="{% url 'login' %}" class="btn">Log In Again</a>
+            <a href="{% url 'recipe:recipe_home' %}" class="btn btn-outline">Return Home</a>
+        </div>
     </div>
 {% endblock %}

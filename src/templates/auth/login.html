@@ -10,13 +10,44 @@
 {% block content %}
     <div class="login-container">
         <h1>Login</h1>
-        {% if error_message %}
-            <p>{{ error_message }}</p>
+        
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
         {% endif %}
-        <form action="" method="POST">
+
+        {% if form.errors %}
+            <div class="alert alert-error">
+                Your username and password didn't match. Please try again.
+            </div>
+        {% endif %}
+
+        <form method="POST" class="login-form">
             {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Login</button>
+            <div class="form-group">
+                <label for="id_username">Username</label>
+                <input type="text" name="username" autofocus autocapitalize="none" autocomplete="username" 
+                       maxlength="150" class="form-control" required id="id_username" placeholder="Enter your username">
+            </div>
+            <div class="form-group">
+                <label for="id_password">Password</label>
+                <input type="password" name="password" autocomplete="current-password" 
+                       class="form-control" required id="id_password" placeholder="Enter your password">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
         </form>
+
+        <div class="divider">or</div>
+
+        <a href="{% url 'demo_login' %}" class="btn btn-outline-secondary btn-block">
+            Try Demo Account
+        </a>
+
+        <div class="demo-info">
+            <p>Demo account gives you full access to explore all features.</p>
+        </div>
     </div>
 {% endblock %}

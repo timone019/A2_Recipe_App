@@ -19,12 +19,13 @@ from django.urls import path
 from django.urls import include
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import login_view, logout_view, logout_success_view
+from .views import login_view, logout_view, logout_success_view, demo_login_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('recipe.urls')),
     path('login/', login_view, name='login'),
+    path('demo-login/', demo_login_view, name='demo_login'),
     path('logout/', logout_view, name='logout'),
     path('logout_success/', logout_success_view, name='logout_success'),
 ]
